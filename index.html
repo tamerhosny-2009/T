@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EL Prof</title>
+<style>
+:root{--bg:#050507;--panel:#101018;--line:#2b2b3a;--txt:#f4f4f7;--mut:#9b9ba8;--a:#9b7bff;--b:#4bdcff;--danger:#ff6078;--ok:#56e39f;--gold:#ffd166}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 10%,#19152b 0,transparent 30%),radial-gradient(circle at 85% 90%,#0c2029 0,transparent 30%),var(--bg);color:var(--txt);font-family:Tahoma,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+#particles{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}.p{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;opacity:.25;animation:up linear infinite}@keyframes up{from{transform:translateY(105vh)}to{transform:translateY(-10vh) translateX(50px)}}
+#intro{position:fixed;inset:0;background:#030304;z-index:999;display:grid;place-items:center;transition:1s}.introName{font-size:clamp(55px,14vw,140px);font-weight:900;letter-spacing:5px;text-shadow:0 0 35px var(--a);animation:glitch 3s infinite}.introName span{color:var(--a)}@keyframes glitch{0%,90%,100%{transform:translate(0)}92%{transform:translate(-4px,2px)}94%{transform:translate(4px,-2px)}}
+header{width:min(1150px,94%);margin:auto;padding:22px 0;display:flex;justify-content:space-between;align-items:center}.logo{font-size:25px;font-weight:900}.logo span{color:var(--a)}
+button{font:inherit;cursor:pointer;color:#fff;border:1px solid var(--line);background:#171721;border-radius:13px;padding:12px 16px}button:hover{transform:translateY(-1px);border-color:var(--a)}.primary{background:linear-gradient(135deg,var(--a),#5c43b9);border:none}.danger{color:#ff9aaa;border-color:#71313e}.ok{color:#8af3bc}
+main{width:min(1150px,94%);margin:30px auto 70px}.hero{text-align:center;padding:45px 10px}.hero h1{font-size:clamp(48px,10vw,100px);margin:0}.hero h1 span{color:var(--a)}.hero p{color:var(--mut);line-height:2}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{min-height:230px;padding:26px;border:1px solid var(--line);border-radius:25px;background:linear-gradient(145deg,#12121b,#08080c);display:flex;flex-direction:column;box-shadow:0 20px 60px #0008}.card .icon{font-size:52px}.card p{color:var(--mut);line-height:1.8}.card button{margin-top:auto}
+.modal{position:fixed;inset:0;z-index:500;background:#000b;backdrop-filter:blur(9px);display:grid;place-items:center;padding:16px}.hidden{display:none!important}.box{width:min(900px,100%);max-height:92vh;overflow:auto;background:#0c0c12;border:1px solid var(--line);border-radius:25px;padding:24px;box-shadow:0 30px 100px #000}.close{float:left;border-radius:50%;width:42px;height:42px;padding:0}.box h2{margin-top:0}
+input,textarea,select{width:100%;background:#08080d;border:1px solid var(--line);border-radius:12px;color:#fff;padding:13px;margin:7px 0 12px;outline:none}input:focus,textarea:focus,select:focus{border-color:var(--a)}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.row>*{flex:1}.adminTabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tab{display:none}.tab.active{display:block}.panel{border:1px solid var(--line);padding:17px;border-radius:18px;margin-bottom:15px;background:#ffffff05}
+.item{padding:12px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:center}.item:last-child{border-bottom:0}.actions{display:flex;gap:6px;flex-wrap:wrap}
+#wheelWrap{text-align:center}#wheel{width:min(520px,82vw);height:min(520px,82vw);max-width:520px;max-height:520px;border-radius:50%;border:7px solid #ffffff18}.pointer{font-size:42px;transform:rotate(180deg);margin-bottom:-20px;position:relative}.result{padding:15px;background:#ffffff08;border-radius:15px;margin:15px 0;font-size:20px;font-weight:bold}.match{padding:18px;border:1px solid #ffd16655;border-radius:17px;margin:12px 0;font-size:22px}
+.details{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.detail{border:1px solid var(--line);border-radius:15px;padding:16px;background:#ffffff05}.detail b{display:block;color:var(--b);margin-bottom:7px}.count{grid-column:1/-1;text-align:center;font-size:clamp(24px,6vw,48px)}.law{border-right:4px solid var(--gold);background:#ffd1660b;padding:15px;line-height:2;border-radius:10px;margin-top:15px}
+ul{padding:0;list-style:none}li{padding:12px;margin:7px 0;border:1px solid var(--line);border-radius:10px}.win{color:var(--gold)}.lose{color:#ff8191}
+#toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,30px);opacity:0;background:#181822;border:1px solid var(--line);padding:13px 20px;border-radius:30px;transition:.3s;z-index:2000}#toast.show{opacity:1;transform:translate(-50%,0)}
+.avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--a);background:#171721;vertical-align:middle}.avatar.big{width:90px;height:90px}.playerInfo{display:flex;align-items:center;gap:10px}.imageWord{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.wordThumb{width:110px;height:80px;object-fit:cover;border-radius:10px;border:1px solid var(--line);cursor:pointer}.wordActions{display:flex;gap:6px;flex-wrap:wrap}.previewOverlay{position:fixed;inset:0;background:#000e;z-index:3000;display:none;align-items:center;justify-content:center;padding:20px}.previewOverlay.show{display:flex}.previewBox{max-width:95vw;max-height:95vh;text-align:center}.previewBox img{max-width:90vw;max-height:78vh;border-radius:15px;border:1px solid var(--line)}.previewBox .actions{justify-content:center;margin-top:12px}
+@media(max-width:750px){.grid,.details{grid-template-columns:1fr}.count{grid-column:auto}.item{align-items:stretch;flex-direction:column}}
+</style>
+</head>
+<body>
+<div id="particles"></div>
+<div id="intro"><div class="introName">EL <span>Prof</span></div></div>
+
+<header><div class="logo">EL <span>Prof</span></div><button onclick="openLogin()">Pro</button></header>
+<main>
+<section class="hero"><h1>EL <span>Prof</span></h1><p>مكان غير مخصص للجميع... هنا تبدأ المواجهات وتُترك القرارات للحظ.</p></section>
+<section class="grid">
+<div class="card"><div class="icon">🫧</div><h2>تعريف الموقع</h2><p>قبل أن تدخل إلى ما يحدث هنا... ربما تحتاج إلى معرفة شيء واحد.</p><button class="primary" onclick="openM('info')">الدخول إلى التعريف</button></div>
+<div class="card"><div class="icon">🎡</div><h2>لف العجلة</h2><p>الحظ يختار، واللاعب المختار يُستبعد بعد تكوين المواجهة.</p><button class="primary" onclick="openWheel()">لف العجلة</button></div>
+<div class="card"><div class="icon">⚔️</div><h2>تفاصيل المشاركات</h2><p>التوقيت والحكم والكلمات والقناة وقانون التأخير.</p><button class="primary" onclick="openDetails()">عرض التفاصيل</button></div>
+</section></main>
+
+<div class="modal hidden" id="info"><div class="box"><button class="close" onclick="closeM('info')">×</button><h2>قبل أن تكمل...</h2><div style="white-space:pre-line;line-height:2.2;font-size:18px">أسئلة بتدور في ذهنك؟
+
+ما هذا الموقع؟
+
+الموقع ده خاص فقط للناس اللي في قناة البثوث والمشاركين في المسابقة.
+
+إنت ملكش EL Pro؟
+
+يعني إنت ملكش دعوة باللي بيحصل هنا.</div><h2>هل فهمت؟</h2><button class="primary" onclick="closeM('info')">تمام فهمت</button></div></div>
+
+<div class="modal hidden" id="login"><div class="box" style="max-width:450px"><button class="close" onclick="closeM('login')">×</button><h2>منطقة Pro</h2><p style="color:#aaa">هذه المنطقة غير متاحة للعامة.</p><input type="password" id="pass" placeholder="رمز الوصول"><div id="err" style="color:#ff8191"></div><button class="primary" onclick="checkPass()">تحقق من الوصول</button></div></div>
+
+<div class="modal hidden" id="wheelModal"><div class="box"><button class="close" onclick="closeM('wheelModal')">×</button><h2>عجلة المواجهة</h2><div id="wheelWrap"><div class="pointer">▼</div><canvas id="wheel" width="600" height="600"></canvas><div class="result" id="spinResult">في انتظار الدوران...</div><div class="match" id="matchText">⚔️ اختر اللاعب الأول بلف العجلة</div><button class="primary" id="spinBtn" onclick="spin()">لف العجلة</button><div class="row" style="justify-content:center;margin-top:10px"><button onclick="soundOn=true;save();toast('تم تشغيل الصوت 🔊')">🔊 تشغيل الصوت</button><button onclick="soundOn=false;save();toast('تم إيقاف الصوت 🔇')">🔇 إيقاف الصوت</button></div></div></div></div>
+
+<div class="modal hidden" id="detailsModal"><div class="box"><button class="close" onclick="closeM('detailsModal')">×</button><h2>تفاصيل المشاركات</h2><div class="details"><div class="detail"><b>📅 تاريخ المواجهة</b><span id="dDate"></span></div><div class="detail"><b>👨‍⚖️ الحكم</b><span id="dJudge"></span></div><div class="detail"><b>🕒 وقت المسابقة</b><span id="dTime"></span></div><div class="detail"><b>📢 قناة إقامة المسابقة</b><span id="dChannel"></span><div id="dLink"></div></div><div class="detail count"><b>⏳ العد التنازلي</b><div id="countdown">-- : -- : -- : --</div><small id="countStatus"></small></div></div><h3>🔤 كلمات المسابقة</h3><ul id="words"></ul><small style="color:#aaa">اضغط على الصورة لتكبيرها.</small><div class="law"><b>⏰ قانون التأخير</b><br>في حالة تأخر أحد المنافسين أكثر من 10 دقائق بعد وقت بدء المنافسة، يعتبر خاسرًا تلقائيًا، ويتم إعلان الطرف الثاني فائزًا.</div><h3>⚔️ سجل المواجهات</h3><ul id="publicMatches"></ul></div></div>
+
+<div class="modal hidden" id="admin"><div class="box"><button class="close" onclick="closeM('admin')">×</button><h2>👑 لوحة تحكم EL Prof</h2>
+<div class="adminTabs"><button onclick="tab('players')">اللاعبون</button><button onclick="tab('matches')">العجلة والمواجهات</button><button onclick="tab('details')">تفاصيل المسابقة</button><button onclick="tab('results')">النتائج</button></div>
+<div id="t-players" class="tab active"><div class="panel"><h3>إضافة لاعب</h3><div class="row"><input id="newPlayer" placeholder="اسم اللاعب"><input id="newPlayerAvatar" type="file" accept="image/*"><button class="primary" onclick="addPlayer()">إضافة</button></div><small style="color:#aaa">يمكن إضافة صورة بروفايل اختيارية لكل مشارك.</small></div><div class="panel"><h3>جميع اللاعبين</h3><div id="playersList"></div><div class="row"><button onclick="restoreAll()">إعادة جميع اللاعبين للعجلة</button><button class="danger" onclick="clearPlayers()">مسح جميع اللاعبين</button></div></div></div>
+<div id="t-matches" class="tab"><div class="panel"><h3>إنشاء مواجهة</h3><div class="row"><button class="primary" onclick="openWheel()">🎡 إنشاء مواجهة بالعجلة</button><button class="danger" onclick="resetCompetition()">إعادة تشغيل المسابقة</button></div><hr style="border-color:#ffffff12;margin:18px 0"><h4>⚔️ إنشاء تحدي يدوي بين شخصين</h4><div class="row"><select id="manualP1"></select><select id="manualP2"></select><button class="primary" onclick="createManualMatch()">إنشاء التحدي</button></div><small style="color:#aaa">سيتم استبعاد الشخصين تلقائيًا من العجلة مثل المواجهة العشوائية.</small></div><div class="panel"><h3>المواجهات السابقة</h3><div id="matchesList"></div></div></div>
+<div id="t-details" class="tab"><div class="panel"><h3>بيانات المسابقة</h3><label>تاريخ ووقت البداية</label><input type="datetime-local" id="cDate"><label>اسم الحكم</label><input id="judge"><label>اسم القناة</label><input id="channel"><label>رابط القناة اختياريًا</label><input id="channelLink" type="url"><button class="primary" onclick="saveDetails()">حفظ البيانات</button></div><div class="panel"><h3>صور كلمات المسابقة</h3><p style="color:#aaa">أضف صورة تحتوي على الكلمة الإنجليزية بدل كتابة الكلمة كنص.</p><div class="row"><input id="newWordImage" type="file" accept="image/*"><button class="primary" onclick="addWordImage()">إضافة الصورة</button></div><div id="wordsAdmin"></div><button class="danger" onclick="clearWords()">حذف جميع الصور</button></div></div>
+<div id="t-results" class="tab"><div class="panel"><h3>تسجيل نتيجة</h3><select id="resultMatch" onchange="winnerOptions()"></select><label>الفائز</label><select id="winner"></select><label>سبب النتيجة</label><select id="reason"><option>فوز عادي</option><option>فوز بسبب التأخير</option></select><button class="primary" onclick="saveResult()">حفظ النتيجة</button></div><div class="panel"><h3>النتائج</h3><div id="resultsList"></div></div></div>
+</div></div>
+<div class="previewOverlay" id="imagePreview"><div class="previewBox"><img id="previewImg" src="" alt="صورة كلمة"><div class="actions"><button class="primary" onclick="downloadPreview()">⬇ تنزيل الصورة</button><button onclick="closePreview()">إغلاق</button></div></div></div><div id="toast"></div>
+
+<script>
+const ADMIN_PASSWORD="Tamer010525"; // غيّر رمز الأدمن هنا
+const KEY="ELProf_GitHub_2026";
+let S=JSON.parse(localStorage.getItem(KEY)||"null")||{players:[],excluded:[],matches:[],words:[],sound:true,competition:{datetime:"",judge:"EL Prof",channel:"قناة البث الرئيسية",link:""}};
+let soundOn=S.sound!==false, angle=0, spinning=false, picks=[];
+function save(){S.sound=soundOn;localStorage.setItem(KEY,JSON.stringify(S))}
+for(let i=0;i<42;i++){let p=document.createElement("i");p.className="p";p.style.left=Math.random()*100+"%";p.style.animationDuration=(8+Math.random()*14)+"s";p.style.animationDelay=(-Math.random()*15)+"s";document.getElementById("particles").appendChild(p)}
+setTimeout(()=>{document.getElementById("intro").style.opacity=0;setTimeout(()=>document.getElementById("intro").style.display="none",1000)},2500);
+function openM(id){document.getElementById(id).classList.remove("hidden")}function closeM(id){document.getElementById(id).classList.add("hidden")}
+function openLogin(){openM("login");document.getElementById("pass").value="";document.getElementById("err").textContent=""}
+function checkPass(){if(document.getElementById("pass").value===ADMIN_PASSWORD){closeM("login");openM("admin");refresh()}else document.getElementById("err").textContent="الوصول غير مصرح به."}
+document.getElementById("pass").addEventListener("keydown",e=>{if(e.key==="Enter")checkPass()});
+function tab(n){document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.getElementById("t-"+n).classList.add("active");if(n==="results")refreshResults()}
+function esc(x){return String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function addPlayer(){
+ let n=document.getElementById("newPlayer").value.trim(), f=document.getElementById("newPlayerAvatar").files[0];
+ if(!n)return toast("اكتب اسم اللاعب.");
+ if(S.players.some(x=>playerName(x)===n))return toast("اللاعب موجود بالفعل.");
+ function done(avatar){
+   S.players.push({name:n,avatar:avatar||""});
+   document.getElementById("newPlayer").value="";
+   document.getElementById("newPlayerAvatar").value="";
+   save();refresh();draw();toast("تمت إضافة اللاعب");
+ }
+ if(f){let r=new FileReader();r.onload=()=>done(r.result);r.readAsDataURL(f)}else done("");
+}
+function playerName(x){return typeof x==="string"?x:x.name}
+function playerAvatar(x){return typeof x==="string"?"":(x.avatar||"")}
+function getPlayer(name){return S.players.find(x=>playerName(x)===name)}
+function avatarHTML(name,cls=""){let p=getPlayer(name),a=p?playerAvatar(p):"";return a?`<img class="avatar ${cls}" src="${a}" alt="${esc(name)}">`:`<div class="avatar ${cls}" style="display:inline-grid;place-items:center">👤</div>`}
+function editPlayer(i){let old=playerName(S.players[i]),n=prompt("الاسم الجديد:",old);if(!n)return;let nn=n.trim();S.players[i].name=nn;S.excluded=S.excluded.map(x=>x===old?nn:x);S.matches.forEach(m=>{if(m.p1===old)m.p1=nn;if(m.p2===old)m.p2=nn});save();refresh();draw()}
+function delPlayer(i){if(!confirm("حذف اللاعب؟"))return;let n=playerName(S.players[i]);S.players.splice(i,1);S.excluded=S.excluded.filter(x=>x!==n);save();refresh();draw()}
+function restorePlayer(n){S.excluded=S.excluded.filter(x=>x!==n);save();refresh();draw();toast("تمت إعادة اللاعب للعجلة")}
+function restoreAll(){S.excluded=[];save();refresh();draw()}
+function clearPlayers(){if(!confirm("حذف جميع اللاعبين؟"))return;S.players=[];S.excluded=[];S.matches=[];save();refresh();draw()}
+function available(){return S.players.map(playerName).filter(x=>!S.excluded.includes(x))}
+function refreshManualPlayers(){
+ const a=available(), all=S.players.map(playerName);
+ const opts=all.map(n=>`<option value="${esc(n)}">${esc(n)}${S.excluded.includes(n)?" — مستبعد":""}</option>`).join("");
+ ["manualP1","manualP2"].forEach(id=>{let el=document.getElementById(id);if(el)el.innerHTML=opts||"<option>لا يوجد لاعبون</option>"});
+}
+function createManualMatch(){
+ let p1=document.getElementById("manualP1").value,p2=document.getElementById("manualP2").value;
+ if(!p1||!p2)return toast("أضف لاعبين أولًا.");
+ if(p1===p2)return toast("يجب اختيار شخصين مختلفين.");
+ if(S.excluded.includes(p1)||S.excluded.includes(p2))return toast("أحد اللاعبين مستبعد من العجلة بالفعل. أعده أولًا إذا أردت.");
+ S.matches.push({id:Date.now(),p1,p2,result:null});
+ S.excluded=[...new Set([...S.excluded,p1,p2])];
+ save();refresh();draw();toast("تم إنشاء التحدي اليدوي واستبعاد الشخصين من العجلة ⚔️");
+}
+const cv=document.getElementById("wheel"),cx=cv.getContext("2d");
+function draw(){let a=available(),w=cv.width,h=cv.height,r=w/2-10;cx.clearRect(0,0,w,h);cx.save();cx.translate(w/2,h/2);if(!a.length){cx.fillStyle="#777";cx.font="bold 26px Arial";cx.textAlign="center";cx.fillText("لا يوجد لاعبون",0,0);cx.restore();return}let sl=Math.PI*2/a.length;a.forEach((n,i)=>{let st=angle+i*sl;cx.beginPath();cx.moveTo(0,0);cx.arc(0,0,r,st,st+sl);cx.fillStyle=`hsl(${245+i*360/a.length},45%,${i%2?24:31}%)`;cx.fill();cx.strokeStyle="#ffffff25";cx.stroke();cx.save();cx.rotate(st+sl/2);cx.fillStyle="#fff";cx.font=`bold ${Math.max(14,Math.min(25,280/a.length))}px Arial`;cx.textAlign="right";cx.fillText(n.length>16?n.slice(0,15)+"…":n,r-22,7);cx.restore()});cx.beginPath();cx.arc(0,0,52,0,Math.PI*2);cx.fillStyle="#08080d";cx.fill();cx.fillStyle="#9b7bff";cx.font="bold 22px Arial";cx.textAlign="center";cx.fillText("EL",0,8);cx.restore()}
+function openWheel(){picks=[];document.getElementById("spinResult").textContent="في انتظار الدوران...";document.getElementById("matchText").textContent="⚔️ اختر اللاعب الأول بلف العجلة";draw();openM("wheelModal")}
+function tone(f,d=.12){if(!soundOn)return;try{let A=new (AudioContext||webkitAudioContext)(),o=A.createOscillator(),g=A.createGain();o.frequency.value=f;g.gain.value=.04;o.connect(g);g.connect(A.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,A.currentTime+d);o.stop(A.currentTime+d)}catch(e){}}
+function spin(){if(spinning)return;let a=available();if(!a.length)return toast("لا يوجد لاعب متاح.");spinning=true;document.getElementById("spinBtn").disabled=true;let start=angle,target=start+(8+Math.random()*5)*Math.PI*2+Math.random()*Math.PI*2,t0=performance.now(),dur=4000;tone(90,.3);function go(t){let p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,4);angle=start+(target-start)*e;draw();if(p<1)requestAnimationFrame(go);else finish()}requestAnimationFrame(go)}
+function finish(){let a=available(),sl=Math.PI*2/a.length,norm=(( -Math.PI/2-angle)%(Math.PI*2)+Math.PI*2)%(Math.PI*2),i=Math.floor(norm/sl)%a.length,n=a[i];picks.push(n);document.getElementById("spinResult").textContent="تم اختيار: "+n;tone(280,.2);if(picks.length===1){document.getElementById("matchText").textContent=n+" ... في انتظار المنافس"}else{let m={id:Date.now(),p1:picks[0],p2:picks[1],result:null};S.matches.push(m);S.excluded=[...new Set([...S.excluded,m.p1,m.p2])];save();document.getElementById("matchText").innerHTML=`⚔️ ${esc(m.p1)} <b style="color:#9b7bff">VS</b> ${esc(m.p2)}`;picks=[];refresh();draw();tone(480,.4);toast("تم تكوين المواجهة واستبعاد اللاعبين")}spinning=false;document.getElementById("spinBtn").disabled=false}
+function deleteMatch(id){let m=S.matches.find(x=>x.id===id);if(!m||!confirm("حذف المواجهة؟"))return;S.matches=S.matches.filter(x=>x.id!==id);S.excluded=S.excluded.filter(x=>x!==m.p1&&x!==m.p2);save();refresh();draw()}
+function editMatch(id){let m=S.matches.find(x=>x.id===id),a=prompt("اللاعب الأول:",m.p1),b=a&&prompt("اللاعب الثاني:",m.p2);if(!a||!b)return;m.p1=a.trim();m.p2=b.trim();[m.p1,m.p2].forEach(n=>{if(!S.players.some(x=>playerName(x)===n))S.players.push({name:n,avatar:""});if(!S.excluded.includes(n))S.excluded.push(n)});save();refresh();draw()}
+function resetCompetition(){if(!confirm("مسح المواجهات وإعادة اللاعبين للعجلة؟"))return;S.matches=[];S.excluded=[];save();refresh();draw()}
+function saveDetails(){S.competition.datetime=document.getElementById("cDate").value;S.competition.judge=document.getElementById("judge").value.trim();S.competition.channel=document.getElementById("channel").value.trim();S.competition.link=document.getElementById("channelLink").value.trim();save();renderDetails();toast("تم حفظ البيانات")}
+function addWordImage(){
+ let f=document.getElementById("newWordImage").files[0];
+ if(!f)return toast("اختر صورة أولًا.");
+ let r=new FileReader();
+ r.onload=()=>{S.words.push({image:r.result,name:f.name});document.getElementById("newWordImage").value="";save();refreshWords();renderDetails();toast("تمت إضافة صورة الكلمة")};
+ r.readAsDataURL(f);
+}
+function moveWord(i,d){let j=i+d;if(j<0||j>=S.words.length)return;[S.words[i],S.words[j]]=[S.words[j],S.words[i]];save();refreshWords();renderDetails()}
+function delWord(i){S.words.splice(i,1);save();refreshWords();renderDetails()}
+function clearWords(){if(confirm("حذف جميع صور الكلمات؟")){S.words=[];save();refreshWords();renderDetails()}}
+function openPreview(src,name="word-image.png"){document.getElementById("previewImg").src=src;document.getElementById("previewImg").dataset.name=name;document.getElementById("imagePreview").classList.add("show")}
+function closePreview(){document.getElementById("imagePreview").classList.remove("show")}
+function downloadPreview(){
+ let img=document.getElementById("previewImg"),a=document.createElement("a");a.href=img.src;a.download=img.dataset.name||"word-image.png";document.body.appendChild(a);a.click();a.remove();
+}
+function refreshWords(){
+ let b=document.getElementById("wordsAdmin");
+ b.innerHTML=S.words.map((w,i)=>{
+   if(typeof w==="string") return `<div class="item"><span>${i+1}. ${esc(w)}</span><div class="actions"><button class="danger" onclick="delWord(${i})">حذف</button></div></div>`;
+   return `<div class="item imageWord"><img class="wordThumb" src="${w.image}" onclick='openPreview(${JSON.stringify(w.image)},${JSON.stringify(w.name||"word-image.png")})'><div class="actions"><button onclick="moveWord(${i},-1)">↑</button><button onclick="moveWord(${i},1)">↓</button><button onclick='openPreview(${JSON.stringify(w.image)},${JSON.stringify(w.name||"word-image.png")})'>تكبير</button><button class="ok" onclick='openPreview(${JSON.stringify(w.image)},${JSON.stringify(w.name||"word-image.png")})'>عرض/تنزيل</button><button class="danger" onclick="delWord(${i})">حذف</button></div></div>`;
+ }).join("")||"لا توجد صور.";
+}
+function saveResult(){let id=+document.getElementById("resultMatch").value,w=document.getElementById("winner").value,r=document.getElementById("reason").value,m=S.matches.find(x=>x.id===id);if(!m||!w)return toast("اختر مواجهة.");m.result={winner:w,reason:r};save();refresh();renderDetails();toast("تم تسجيل النتيجة 🏆")}
+function winnerOptions(){let m=S.matches.find(x=>x.id===+document.getElementById("resultMatch").value),s=document.getElementById("winner");s.innerHTML=m?`<option>${esc(m.p1)}</option><option>${esc(m.p2)}</option>`:""}
+function deleteResult(id){let m=S.matches.find(x=>x.id===id);if(m){m.result=null;save();refresh();renderDetails()}}
+function refreshPlayers(){
+ let b=document.getElementById("playersList");
+ b.innerHTML=S.players.length?S.players.map((p,i)=>{
+   let n=playerName(p), ex=S.excluded.includes(n);
+   return `<div class="item"><div class="playerInfo">${avatarHTML(n)}<div><b>${esc(n)}</b><small style="color:${ex?'#ff8191':'#56e39f'}"> ${ex?'— مستبعد':'— داخل العجلة'}</small></div></div><div class="actions"><button onclick="editPlayer(${i})">تعديل الاسم</button>${ex?`<button class="ok" onclick='restorePlayer(${JSON.stringify(n)})'>إعادة</button>`:""}<button class="danger" onclick="delPlayer(${i})">حذف</button></div></div>`
+ }).join(""):"لا يوجد لاعبون.";
+ refreshManualPlayers();
+}
+function refreshMatches(){document.getElementById("matchesList").innerHTML=S.matches.length?S.matches.map(m=>`<div class="item"><div><b>${esc(m.p1)} ⚔️ ${esc(m.p2)}</b>${m.result?`<div class="win">🏆 الفائز: ${esc(m.result.winner)} — ${esc(m.result.reason)}</div>`:""}</div><div class="actions"><button onclick="editMatch(${m.id})">تعديل</button><button class="danger" onclick="deleteMatch(${m.id})">حذف</button></div></div>`).join(""):"لا توجد مواجهات."}
+function refreshWords(){document.getElementById("wordsAdmin").innerHTML=S.words.map((w,i)=>`<div class="item"><span>${i+1}. ${esc(w)}</span><div class="actions"><button onclick="moveWord(${i},-1)">↑</button><button onclick="moveWord(${i},1)">↓</button><button onclick="editWord(${i})">تعديل</button><button class="danger" onclick="delWord(${i})">حذف</button></div></div>`).join("")||"لا توجد كلمات."}
+function refreshResults(){let sel=document.getElementById("resultMatch");sel.innerHTML=S.matches.length?S.matches.map(m=>`<option value="${m.id}">${esc(m.p1)} ⚔️ ${esc(m.p2)}</option>`).join(""):"<option value=''>لا توجد مواجهات</option>";winnerOptions();document.getElementById("resultsList").innerHTML=S.matches.filter(m=>m.result).map(m=>`<div class="item"><div><b class="win">🏆 ${esc(m.result.winner)} فائز</b><div>${esc(m.result.reason)}</div></div><button class="danger" onclick="deleteResult(${m.id})">حذف النتيجة</button></div>`).join("")||"لا توجد نتائج."}
+function refresh(){refreshPlayers();refreshMatches();refreshWords();document.getElementById("cDate").value=S.competition.datetime||"";document.getElementById("judge").value=S.competition.judge||"";document.getElementById("channel").value=S.competition.channel||"";document.getElementById("channelLink").value=S.competition.link||"";refreshResults()}
+function openDetails(){renderDetails();openM("detailsModal")}
+function renderDetails(){let c=S.competition,d=c.datetime?new Date(c.datetime):null;document.getElementById("dDate").textContent=d?d.toLocaleDateString("ar-EG",{weekday:"long",year:"numeric",month:"long",day:"numeric"}):"غير محدد";document.getElementById("dTime").textContent=d?d.toLocaleTimeString("ar-EG",{hour:"2-digit",minute:"2-digit"}):"غير محدد";document.getElementById("dJudge").textContent=c.judge||"غير محدد";document.getElementById("dChannel").textContent=c.channel||"غير محددة";document.getElementById("dLink").innerHTML=c.link?`<a href="${esc(c.link)}" target="_blank" style="color:#4bdcff">الدخول إلى القناة</a>`:"";document.getElementById("words").innerHTML=S.words.length?S.words.map((w,i)=>{if(typeof w==="string")return `<li>${i+1}. ${esc(w)}</li>`;return `<li class="imageWord"><img class="wordThumb" src="${w.image}" onclick='openPreview(${JSON.stringify(w.image)},${JSON.stringify(w.name||"word-image.png")})'><div class="wordActions"><button onclick='openPreview(${JSON.stringify(w.image)},${JSON.stringify(w.name||"word-image.png")})'>🔍 تكبير</button><button class="ok" onclick='openPreview(${JSON.stringify(w.image)},${JSON.stringify(w.name||"word-image.png")})'>⬇ عرض/تنزيل</button></div></li>`}).join(""):"<li>لم تتم إضافة صور.</li>";document.getElementById("publicMatches").innerHTML=S.matches.length?S.matches.map(m=>{let loser=m.result?(m.result.winner===m.p1?m.p2:m.p1):"";return `<li><b>${esc(m.p1)} ⚔️ ${esc(m.p2)}</b>${m.result?`<div class="win">🏆 ${esc(m.result.winner)} فائز</div><div class="lose">❌ ${esc(loser)} ${m.result.reason==="فوز بسبب التأخير"?"خاسر بسبب التأخير":"خاسر"}</div>`:""}</li>`}).join(""):"<li>لا توجد مواجهات.</li>"}
+function updateCountdown(){let d=S.competition.datetime?new Date(S.competition.datetime).getTime()-Date.now():null,e=document.getElementById("countdown"),st=document.getElementById("countStatus");if(d===null){e.textContent="-- : -- : -- : --";st.textContent="لم يتم تحديد موعد المسابقة.";return}if(d<=0){e.textContent="بدأت المسابقة الآن";st.textContent="⚔️ الوقت المحدد قد وصل.";return}let D=Math.floor(d/864e5),H=Math.floor(d%864e5/36e5),M=Math.floor(d%36e5/6e4),Q=Math.floor(d%6e4/1e3);e.textContent=[D,H,M,Q].map(x=>String(x).padStart(2,"0")).join(" : ");st.textContent="أيام : ساعات : دقائق : ثوانٍ"}
+let tt;function toast(t){let e=document.getElementById("toast");e.textContent=t;e.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>e.classList.remove("show"),2800)}
+draw();renderDetails();refresh();updateCountdown();setInterval(updateCountdown,1000);
+</script>
+</body></html>
